@@ -17,6 +17,8 @@ services:
       timeout: 30s
       retries: 3
       start_period: 60s
+    labels:
+      autoheal-app: true
   autoheal:
     image: willfarrell/autoheal:latest
     tty: true
@@ -25,5 +27,6 @@ services:
       - AUTOHEAL_INTERVAL=60
       - AUTOHEAL_START_PERIOD=300
       - AUTOHEAL_DEFAULT_STOP_TIMEOUT=10
+      - AUTOHEAL_CONTAINER_LABEL=autoheal-app
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
